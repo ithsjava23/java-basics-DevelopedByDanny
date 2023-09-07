@@ -49,19 +49,41 @@ public class Menu {
     }
 
     private void visualize() {
+        int maxPrice = 0;
+        int minPrice = Integer.MAX_VALUE;
 
-        int rows = 7;
-        int columns = 75;
-
-
-        for (int r = 0; r < rows; r++) {
-
-            for (int c = 0; c < columns; c++) {
-
-
-            }
-
+        for (Price price : pricesPerHour) {   //Get min and max number for the output
+            if (price.getPrice() > maxPrice) maxPrice = price.getPrice();
+            if (price.getPrice() < minPrice) minPrice = price.getPrice();
         }
+
+        double row = Math.abs(maxPrice - minPrice) / 5.0; //Calculate the row breakpoints for the diagram
+
+        for (int i = 5; i >= 0; i--) {
+            if (i == 5) System.out.printf("%3d|", maxPrice);
+            else if (i == 0) System.out.printf("%3d|", minPrice);
+            else System.out.print("   |");
+
+            for (int j = 0; j < pricesPerHour.length; j++) {
+                if (pricesPerHour[j].getPrice() == maxPrice || pricesPerHour[j].getPrice() >= minPrice + (row * i))
+                    System.out.print("  x");
+                else
+                    System.out.print("   ");
+            }
+            System.out.print("\n");
+        }
+
+        System.out.print("   |");
+        for (Price price : pricesPerHour) {
+            System.out.print("---");
+        }
+        System.out.print("\n");
+
+        System.out.print("   |");
+        for (Price price : pricesPerHour) {
+            System.out.print(" " + price.getHourString());
+        }
+        System.out.print("\n");
     }
 
     private void startLoadingAt() {
@@ -135,7 +157,6 @@ public class Menu {
     }
 
     private void exitPrompt() {
-//        System.out.println("Programmet avslutas!");
         programRunning = false;
     }
 }
