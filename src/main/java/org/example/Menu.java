@@ -65,7 +65,7 @@ public class Menu {
             else System.out.print("   |");
 
             for (int j = 0; j < pricesPerHour.length; j++) {
-                if (pricesPerHour[j].getPrice() == maxPrice || pricesPerHour[j].getPrice() >= minPrice + (row * i))
+                if (pricesPerHour[j].getPrice() == maxPrice || pricesPerHour[j].getPrice() >= Math.floor(minPrice + row * i ))
                     System.out.print("  x");
                 else
                     System.out.print("   ");
@@ -74,9 +74,7 @@ public class Menu {
         }
 
         System.out.print("   |");
-        for (Price price : pricesPerHour) {
-            System.out.print("---");
-        }
+        Arrays.stream(pricesPerHour).map(price -> "---").forEach(System.out::print);
         System.out.print("\n");
 
         System.out.print("   |");
