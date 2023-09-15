@@ -109,24 +109,6 @@ public class Menu {
         Arrays.stream(pricesPerHour)
                 .sorted(Comparator.comparingInt(Price::getPrice).reversed())
                 .forEach(Price -> System.out.print(Price + "\n"));
-// I also did a bubblesort!!
-
-//        Price[] tempArray = pricesPerHour;
-//        for (int i = 0; i < tempArray.length - 1; i++) {
-//            for (int j = 0; j < tempArray.length - 1 - i; j++) {
-//                if (tempArray[j].getPrice() < tempArray[j + 1].getPrice()) {
-//                    Price temp = tempArray[j];
-//                    tempArray[j] = tempArray[j + 1];
-//                    tempArray[j + 1] = temp;
-//                }
-//            }
-//        }
-//        for (Price price : tempArray) {
-//            System.out.println(price);
-//        }
-//        for (Price price : pricesPerHour) {
-//            System.out.println(price);
-//        }
     }
 
     private void calcMinMaxAvg() {
@@ -150,8 +132,12 @@ public class Menu {
 
     private void inputPrices() {
         for (int i = 0; i < pricesPerHour.length; i++) {
-            pricesPerHour[i] = new Price(i, scanner.nextInt());
+            pricesPerHour[i] = new Price(i, readInt());
         }
+    }
+
+    private int readInt() {
+        return Integer.parseInt(scanner.nextLine());
     }
 
     private void exitPrompt() {
